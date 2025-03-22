@@ -19,18 +19,18 @@ Route::get('/', function () {
 });
 //produtos
 Route::get('/produtos', [ProductController::class,'index'])->name('produtos');
-Route::get('/produtos/listar', 'ProductController@listar');
-Route::get('/produtos/cadastrar', 'ProductController@create');
-Route::post('/produtos/listar', 'ProductController@store');
-Route::get('/produtos/{id}/edit', 'ProductController@edit');
-Route::put('/produtos/{id}/', 'ProductController@update');
-Route::delete('/produtos/{id}/delete', 'ProductController@destroy');
+Route::get('/produtos/listar', [ProductController::class,'listar']);
+Route::get('/produtos/cadastrar', [ProductController::class,'create']);
+Route::post('/produtos/listar', [ProductController::class,'store']);
+Route::get('/produtos/{id}/edit', [ProductController::class,'edit']);
+Route::put('/produtos/{id}/', [ProductController::class,'update']);
+Route::delete('/produtos/{id}/delete', [ProductController::class,'destroy']);
 
 //categorias
 Route::get('/categorias', [CategoryController::class, 'index']);
-Route::get('/categorias/listar', 'CategoryController@listar');
-Route::get('/categorias/cadastrar', 'CategoryController@create');
-Route::get('/categorias/{id}/edit', 'CategoryController@edit');
-Route::post('/categorias/listar', 'CategoryController@store');
-Route::delete('/categorias/{id}/delete', 'CategoryController@destroy');
+Route::get('/categorias/listar', [CategoryController::class, 'listar']);
+Route::get('/categorias/cadastrar', [CategoryController::class, 'create']);
+Route::get('/categorias/{id}/edit', [CategoryController::class, 'edit']);
+Route::post('/categorias/listar', [CategoryController::class, 'store']);
+Route::delete('/categorias/{id}/delete', [CategoryController::class, 'destroy']);
 

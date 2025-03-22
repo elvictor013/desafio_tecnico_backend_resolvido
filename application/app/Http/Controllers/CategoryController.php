@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = \App\Models\Category::all();
-        return view('categorias-cadastrar', ['categories' => $categories] );
+        return view('categorias', ['categories' => $categories] );
     }
 
     public function listar()
@@ -33,7 +34,7 @@ class CategoryController extends Controller
     {
         $category= $this->objCategory->create([
             'name'=>$request->name,
-            'slug'=> str_slug($request->name),
+            'slug'=> Str::slug($request->name),
             'description'=>$request->description
         ]);
         if($category){

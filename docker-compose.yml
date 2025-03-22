@@ -1,9 +1,9 @@
 services:
-  php:
-    container_name: php8
+  app:
+    container_name: laravel_app
     build:
       context: .
-      dockerfile: ./php/Dockerfile
+      dockerfile: ./docker/php/Dockerfile
     ports:
       - 80:80
     volumes:
@@ -51,14 +51,14 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: ./nginx/Dockerfile
+      dockerfile: ./docker/nginx/Dockerfile
     ports:
       - "8080:80"
     networks:
       - stack
     volumes:
       - ./application/:/var/www/html/
-      - ./logs/nginx:/var/log/nginx
+      - ./docker/logs/nginx:/var/log/nginx
     container_name: nginx
 
 networks:
