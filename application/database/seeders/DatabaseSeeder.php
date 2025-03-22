@@ -1,0 +1,19 @@
+<?php
+
+use Database\Seeders\CategoriesSeeder;
+use Database\Seeders\ProductsSeeder;
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $this->call(CategoriesSeeder::class);
+        $this->call(ProductsSeeder::class);
+    }
+}
