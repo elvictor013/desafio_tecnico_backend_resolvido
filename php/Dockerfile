@@ -24,14 +24,5 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 #RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 RUN docker-php-ext-install pdo pdo_pgsql pgsql zip
 
-# Cria diretório da aplicação
-WORKDIR /var/www/html
-
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-RUN chown -R www-data:www-data /var/www/html
-
-EXPOSE 9000
-
-CMD ["php-fpm"]
