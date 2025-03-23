@@ -66,6 +66,28 @@ Faça sua solução na pasta [Desafio 3](./desafio2/)
 
 Para iniciá-lo, siga os passos abaixo:
 
+**Docker**
+
+
+
+1 -  Criando os volumes e a network:
+***(Linux/Mac)***
+```bash
+$ ./bin/build.sh
+$ ./bin/startDaemon.sh (executa o comando docker compose up -d)
+```
+***Windows (Utilizar git bash)***
+```bash
+$ ./bin/build.sh
+$ ./bin/startDaemon.sh (executa o comando docker compose up -d)
+```
+
+```bash
+$ sudo apt-get update
+$ sudo apt-get install apt-transport-https ca-certificates -y 
+$ sudo update-ca-certificates 
+```
+
 1 -  Clone o projeto para o seu computador:
 ```bash
 $ git clone https://gitfront.io/r/proesc/wucsJbTiQMt4/desafio-tecnico-backend.git
