@@ -19,8 +19,10 @@ RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+EXPOSE 9000
+
 WORKDIR /var/www/html
 
 COPY ./../application/composer.json .
 
-EXPOSE 9000
+# RUN composer install
