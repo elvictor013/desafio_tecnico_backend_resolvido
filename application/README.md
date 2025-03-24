@@ -1,66 +1,50 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Desafio Técnico Proesc.com
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Descrição do Desafio
 
-## About Laravel
+O desafio técnico envolve a análise e correção de alguns problemas em uma aplicação. Abaixo estão os problemas identificados pelos usuários e as soluções implementadas.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Problemas Identificados e Correções
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. **Erro na Navegação para as Páginas de "Produtos" e "Categorias"**
+   - **Descrição do Problema:** Ao tentar acessar as páginas de "Produtos" ou "Categorias", a navegação não funciona.
+   - **Correção:** O problema estava relacionado com a definição incorreta das rotas no arquivo `web.php`. Foi adicionado o mapeamento correto das rotas para as páginas de "Produtos" e "Categorias".
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2. **Problema no Cadastro de Categorias**
+   - **Descrição do Problema:** Ao tentar cadastrar uma nova categoria, a mensagem de sucesso é exibida, mas o cadastro não é realizado.
+   - **Correção:** O problema estava relacionado com o método da requisição, que estava utilizando `GET` ao invés de `POST`. A requisição foi corrigida para `POST`, e agora o cadastro da categoria é feito corretamente.
 
-## Learning Laravel
+3. **Erro na Exibição do Nome da Categoria Relacionada ao Produto**
+   - **Descrição do Problema:** Na página de listagem de produtos, o nome da categoria relacionada não estava sendo exibido, aparecendo apenas o ID da categoria.
+   - **Correção:** O problema estava no relacionamento entre o produto e a categoria. Foi corrigido o relacionamento entre as tabelas e atualizado o código para exibir o nome correto da categoria associada ao produto.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+4. **Outras Melhorias**
+   - **Rota de Atualização de Categoria:** Foi adicionada a rota `Route::put('/categorias/{id}/', [CategoryController::class, 'update']);` no arquivo de rotas `web.php` para permitir a atualização das categorias.
+   - **Autorização no Request:** No processo de cadastro, foi corrigido o problema de autorização, alterando para `true` no request.
+   - **Mensagens de Sucesso:** Agora, todas as ações de criação, atualização e exclusão exibem mensagens de sucesso.
+   - **Confirmação de Exclusão:** Para evitar exclusões acidentais, foi adicionado um alerta de confirmação quando o usuário tenta deletar um item.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Como Preparar o Ambiente para Testar a Aplicação
 
-## Laravel Sponsors
+Para testar a aplicação em seu ambiente local, siga os passos abaixo:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. **Atualização do PHP e Docker**
+   - Devido à dificuldade de configurar o ambiente com PHP 5.6, o ambiente foi atualizado para PHP 8.1 utilizando Docker.
+   
+2. **Construir os Volumes e Iniciar o Docker**
+   Execute os seguintes comandos no terminal:
 
-### Premium Partners
+   ```bash
+   ./bin/build.sh  # Cria os volumes do Docker
+   docker network create backend_proesc_network  # Cria a rede do Docker
+   docker-compose up -d  # Inicia os containers em segundo plano
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3. **Acessar o Container e Configurar a Aplicação Após iniciar o Docker, acesse o container e configure a aplicação:**
+docker-compose exec app sh  # Acessa o shell do container
+composer install  # Instala as dependências do Composer
+php artisan key:generate  # Gera a chave de aplicação
+php artisan migrate  # Executa as migrações do banco de dados
+php artisan db:seed  # Popula o banco de dados com dados iniciais
+chmod -R 777 /var/www/html/storage  # Ajusta permissões do diretório storage

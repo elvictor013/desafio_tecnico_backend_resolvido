@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::get('/categorias', [CategoryController::class, 'index']);
 Route::get('/categorias/listar', [CategoryController::class, 'listar']);
 Route::get('/categorias/cadastrar', [CategoryController::class, 'create']);
 Route::get('/categorias/{id}/edit', [CategoryController::class, 'edit']);
+Route::put('/categorias/{id}/', [CategoryController::class, 'update']);
 Route::post('/categorias/listar', [CategoryController::class, 'store']);
 Route::delete('/categorias/{id}/delete', [CategoryController::class, 'destroy']);
 
