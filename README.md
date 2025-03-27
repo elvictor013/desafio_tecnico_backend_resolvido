@@ -1,7 +1,5 @@
 # Desafio Técnico - Proesc.com
 
-Bem-vindo(a) ao desafio técnico do Proesc.com! Este desafio tem como objetivo avaliar seus conhecimentos em desenvolvimento backend utilizando PHP e Laravel.
-
 ## Tecnologias Utilizadas
 
 - **PHP**: Atualizado para a versão **8.1** (devido à dificuldade de configurar o ambiente com PHP 5.6).
