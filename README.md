@@ -54,7 +54,7 @@
 
 ### Configuração do Arquivo `.env`
 
-Para facilitar a configuração, incluí dois arquivos `.env.example`. Basta renomear os dois para `.env` funcionar o sistema.
+Para facilitar a configuração, incluí dois arquivos `.env.example`. Basta renomear os dois para `.env` para funcionar o sistema.
 Precisa dos dois arquivos .env
 
 ### Acesso ao Sistema
