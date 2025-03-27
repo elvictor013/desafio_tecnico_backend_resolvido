@@ -56,6 +56,7 @@
 
 Para facilitar a configuração, incluí dois arquivos `.env.example`. Basta renomear os dois para `.env` para funcionar o sistema.
 Precisa dos dois arquivos .env
+O primeiro .env.exemple está localizado na raiz do projeto, o segundo está localizado na raiz de application !
 
 ### Acesso ao Sistema
 
