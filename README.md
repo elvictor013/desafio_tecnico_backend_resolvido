@@ -56,7 +56,8 @@ Bem-vindo(a) ao desafio técnico do Proesc.com! Este desafio tem como objetivo a
 
 ### Configuração do Arquivo `.env`
 
-Para facilitar a configuração, incluí dois arquivos `.env.example`. Basta renomear um deles para `.env` para utilizar a configuração padrão.
+Para facilitar a configuração, incluí dois arquivos `.env.example`. Basta renomear os dois para `.env` funcionar o sistema.
+Precisa dos dois arquivos .env
 
 ### Acesso ao Sistema
 
