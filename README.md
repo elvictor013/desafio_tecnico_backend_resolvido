@@ -1,140 +1,104 @@
-# Desafio técnico - Proesc
+# Desafio Técnico - Proesc.com
 
+Bem-vindo(a) ao desafio técnico do Proesc.com! Este desafio tem como objetivo avaliar seus conhecimentos em desenvolvimento backend utilizando PHP e Laravel.
 
-## Índice
+## Tecnologias Utilizadas
 
-- [Sobre o desafio](#sobre-o-desafio)
-  - [Desafio 1](#desafio-1)
-  - [Desafio 2](#desafio-2)
-  - [Desafio 3](#desafio-3)
-- [Bonus](#bonus)
-- [Entrega](#entrega)
+- **PHP**: Atualizado para a versão **8.1** (devido à dificuldade de configurar o ambiente com PHP 5.6).
+- **Framework**: Laravel
+- **Banco de Dados**: PostgreSQL
+- **Docker**: Utilizado para facilitar a configuração do ambiente
 
-## Sobre o desafio
+## Configuração do Ambiente
 
-Olá, bem vindo(a) ao desafio técnico do Proesc.com! 
+### Passos para Iniciar a Aplicação
 
-Este desafio técnico é uma atividade prática, onde avaliaremos seus conhecimentos de lógica de programação, banco de dados e html, assuntos que precisará utilizar diariamente para a função desenvolvedor backend no Proesc
+1. **Criar os volumes do Docker**:
+   ```bash
+   ./bin/build.sh
+   ```
 
-- Linguagens: PHP **5.6** (atualmente estamos migrando nosso principal projeto do 5.6 para a versão 8.2)
-- Framework: Laravel
-- Banco de dados: Postgres
+2. **Criar a rede para comunicação entre containers**:
+   ```bash
+   docker network create backend_proesc_network
+   ```
 
-### Desafio 1
-No dia a dia utilizamos de html, css e javascript para criar relatórios para nossas instituições de ensino. 
+3. **Subir os containers**:
+   ```bash
+   docker-compose up -d
+   ```
 
-Assim, uma escola pediu auxílio para criar uma declaração de matrícula. Verifique o modelo disponibilizado pela escola e crie o código para que o relatório seja disponibilizado para a escola.
+4. **Acessar o container da aplicação**:
+   ```bash
+   docker-compose exec app sh
+   ```
 
- **Requisitos**
-- Utilize html e css puro
-- Crie o relatório com base na imagem dispobilizada pela escola: [Modelo de declaração de matrícula](./desafio1/modelo-declaracao.png)
+5. **Instalar as dependências do Laravel**:
+   ```bash
+   composer install
+   ```
 
-    
-**Entregável**
-- Código html e css
+6. **Gerar a chave da aplicação**:
+   ```bash
+   php artisan key:generate
+   ```
 
-Adicione sua solução na pasta [Desafio 1](./desafio1/)
+7. **Executar as migrações e seeds do banco**:
+   ```bash
+   php artisan migrate
+   php artisan db:seed
+   ```
 
-### Desafio 2
-Você recebeu um chamado de um cliente e vai precisar realizar algumas consultas no banco. Utilize um banco de dados local disponível para realizar as consultas necessárias. 
+8. **Garantir permissões no diretório de storage**:
+   ```bash
+   chmod -R 777 /var/www/html/storage
+   ```
 
-Para conectar-se, crie uma nova base de dados PostgreSQL utilizando os comandos disponíveis [aqui](#como-executar).
+### Configuração do Arquivo `.env`
 
-**Consultas a serem feitas**<br>
-1. O cliente gostaria de saber quantos produtos ele possui em cada categoria. Qual SQL você faria para realizar essa consulta?<br>
-2. Além disso, também quer saber a média de preços de cada categoria. Monte o SQL para essa solicitação<br>
-3. Faça um SQL para atualizar todos os produtos da categoria Cremes e Geleias para a categoria Frutas
+Para facilitar a configuração, incluí dois arquivos `.env.example`. Basta renomear um deles para `.env` para utilizar a configuração padrão.
 
-**Entregável**
-- 3 consultas SQL que retornem como resultado os pedidos acima
+### Acesso ao Sistema
 
-Adicione sua solução na pasta [Desafio 2](./desafio2/)
-
-### Desafio 3
-
-Nesse desafio, usuários relataram alguns problemas no uso de uma simples aplicação.
-Como desenvolvedor, você deverá realizar uma análise dos problemas relatados e disponibilizar uma correção para normalizar a aplicação.
-
-1. É encontrado um erro na página inicial ao tentar navegar para página a "Produtos" ou "Categorias". Realize uma correção na navegação.<br>
-2. Um usuário relatou dificuldades ao realizar o cadastro de uma nova categoria. Ao preencher os dados e apertar em "Salvar", mostra a mensagem de sucesso no entanto não é feito o cadastro. Realize uma correção nesse procedimento<br>
-3. Na página de listagem de Produtos, usuários identificaram que não está sendo exibido o nome da Categoria relacionada. Realize uma correção para exibir o nome correto da categoria vinculada ao produto.<br>
-
-Faça sua solução na pasta [Desafio 3](./desafio2/)
-
-
-### Como executar 
-
-Para iniciá-lo, siga os passos abaixo:
-
-**Docker**
-
-
-
-1 -  Criando os volumes e a network:
-***(Linux/Mac)***
-```bash
-$ ./bin/build.sh
-$ ./bin/startDaemon.sh (executa o comando docker compose up -d)
+A aplicação pode ser acessada através do **localhost** no Nginx do Docker:
 ```
-***Windows (Utilizar git bash)***
-```bash
-$ ./bin/build.sh
-$ ./bin/startDaemon.sh (executa o comando docker compose up -d)
+http://laravel_app
+```
+Ou, caso esteja rodando na porta 80, acesse:
+```
+http://localhost
 ```
 
-```bash
-$ sudo apt-get update
-$ sudo apt-get install apt-transport-https ca-certificates -y 
-$ sudo update-ca-certificates 
-```
+## Correções Realizadas
 
-1 -  Clone o projeto para o seu computador:
-```bash
-$ git clone https://gitfront.io/r/proesc/wucsJbTiQMt4/desafio-tecnico-backend.git
-```
-Se tiver algum problema pra clonar, verifique se a parte de certificados está atualizada:
+### 1. Erro na Navegação para "Produtos" e "Categorias"
+   **Problema**: A rota para "Produtos" e "Categorias" não estava definida corretamente no `web.php`.
+   **Correção**:
+   - Adicionadas as rotas ausentes no arquivo `routes/web.php`.
+   
+### 2. Erro no Cadastro de Categoria
+   **Problema**: O botão "Salvar" exibia a mensagem de sucesso, mas não realizava o cadastro.
+   **Correção**:
+   - O formulário estava enviando a requisição como **GET**, em vez de **POST**.
+   - Ajustado o método do formulário para **POST**, garantindo que a função correta fosse chamada.
 
-```bash
-$ sudo apt-get update
-$ sudo apt-get install apt-transport-https ca-certificates -y 
-$ sudo update-ca-certificates 
-```
+### 3. Nome da Categoria não Exibido na Listagem de Produtos
+   **Problema**: Apenas o ID da categoria era exibido na listagem de produtos.
+   **Correção**:
+   - Foi estabelecido o relacionamento correto entre `Produto` e `Categoria`.
+   - Ajustada a consulta para exibir o nome da categoria em vez do ID.
 
-2 - Entre na pasta do projeto
-```bash
-$ cd desafio3
-```
-3 - Instale as depêndencias
+### 4. Outras Melhorias
+   - **Adicionada rota de atualização de categoria:**
+     ```php
+     Route::put('/categorias/{id}/', [CategoryController::class, 'update']);
+     ```
+   - **Ajuste na autorização**: Alterado para `true` no request para corrigir problemas de permissão.
+   - **Feedback melhorado**: Agora todas as ações exibem mensagens de sucesso.
+   - **Confirmação ao deletar**: Adicionado um alerta para confirmar a exclusão de registros.
 
-```bash
-$ composer install
-```
+Se tiver alguma dúvida ou precisar de suporte para rodar a aplicação, entre em contato!
 
-4 - Crie o arquivo arquivo .env copiando o arquivo [.env.example](./desafio3/.env.example) e configure com as informações do seu banco local
+---
+Desenvolvido por Victor Gabriel 
 
-
-5 - Crie uma nova chave para a aplicação
-```bash
-$ php artisan key:generate
-```
-
-6 - Rode as migrations
-```bash
-$ php artisan migrate
-```
-7 - Rode o seeder
-```bash
-$ php artisan db:seed
-```
-8 - Inicie o projeto:
-```bash
-$ php artisan serve
-```
-
-
-## Entrega
-Para entregar sua solução, baixe este projeto e resolva os 3 desafios propostos.
-
-Assim que finalizar, suba a sua solução para o github e nos envie o link do seu repositório respondendo o e-mail recebido.
-
-Em caso de dúvida, não hesite em nos contatar através do e-mail recebido ou para lorena@proesc.com :)
